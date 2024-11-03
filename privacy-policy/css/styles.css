@@ -1,0 +1,56 @@
+A:link {
+	COLOR: #588ccb; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #588ccb; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #333333; TEXT-DECORATION: none
+}
+.textheader {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px}
+.header {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333333;
+
+}
+.topheader {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.subheader {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #666666;
+	font-weight: bold;
+}
+.text {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #666666;
+	font-weight: normal;
+}
+P {
+
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #666666;
+	font-weight: normal;
+}
+.header2 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #333333;
+}
+.image {
+	padding: 3px;
+	filter: Shadow(Color=#666666, Direction=135);
+
+}
