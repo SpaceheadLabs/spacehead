@@ -51,6 +51,47 @@
           </div>      
         </td>
       </tr>
+
+      <tr>
+        <td>
+
+        <form id="email-form">
+          <input type="email" name="to" required placeholder="Recipient Email" /><br/>
+          <input type="text" name="subject" required placeholder="Subject" /><br/>
+          <textarea name="message" required placeholder="Your Message"></textarea><br/>
+          <button type="submit" class="g-recaptcha" data-sitekey="6LeEJnUqAAAAAOr5mZEPfly69LVaHhA8arJFhAc1" data-callback="onSubmit">Send Email</button>
+        </form>
+        
+        <script>
+          async function onSubmit() {
+            const form = document.getElementById("email-form");
+            const formData = new FormData(form);
+            const recaptchaToken = grecaptcha.getResponse();
+        
+            const data = {
+              to: formData.get("to"),
+              subject: formData.get("subject"),
+              message: formData.get("message"),
+              recaptchaToken: recaptchaToken
+            };
+        
+            const response = await fetch("https://www.spacehead.com/send-email", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+        
+            const result = await response.text();
+            alert(result);
+          }
+        </script>
+        
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+      </td>
+    </tr>
+
     </table>
   </div>
 </body>
