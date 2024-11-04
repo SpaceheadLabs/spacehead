@@ -68,8 +68,16 @@
         <script>
           async function handleSubmit(event) {
             event.preventDefault();
-            const recaptchaToken = await grecaptcha.execute('6LebLHUqAAAAACTSumw5l9gNHD0a20eesr-ef183', {action: 'submit'});
 
+            // Get the reCAPTCHA token
+            const recaptchaToken = grecaptcha.getResponse();
+
+            // Check if reCAPTCHA is completed
+            if (!recaptchaToken) {
+                alert("Please complete the reCAPTCHA challenge.");
+                return;
+            }
+            
               const form = document.getElementById("email-form");
               const formData = new FormData(form);
   
