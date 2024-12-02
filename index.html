@@ -1,141 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
 <head>
-<title>spacehead.com</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="https://www.spacehead.com/assets/mdl/material.min.css">
-  <script src="https://www.spacehead.com/assets/mdl/material.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title ng-bind="ngMeta.title"></title>
+  <meta name="title" content="{{ngMeta.title}}">
+  <meta name="description" content="{{ngMeta.description}}">
+  <meta name="robots" content="index, follow, noimageindex, noarchive">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <style>
-      .container {
-          position: relative;
-          display: inline-block; /* Ensures container fits around the image */
-      }
-
-      .text {
-          position: absolute;
-          bottom: -2;
-          right: 12;
-          padding: 10px; /* Adjust as needed */
-          font-family: Arial, sans-serif; /* Adjust font family */
-          font-size: 14px; /* Adjust font size */
-  /*        color: #000000;  #ffae00 */
-          color: rgba(0, 0, 0, 1);
-          text-shadow:
-              -1px -1px 0 rgba(255, 174, 0, 0.5),  
-              1px -1px 0 rgba(255, 174, 0, 0.5),
-              -1px  1px 0 rgba(255, 174, 0, 0.5),
-              1px  1px 0 rgba(255, 174, 0, 0.5); /* Outline color */
-      }
-
-    .center-recaptcha {
-        display: flex;
-        justify-content: center; /* Center horizontally */
-        align-items: center;     /* Center vertically (if needed) */
-        margin: 20px 0;         /* Add some margin for spacing */
-    }
+  	.loader-wrapper { margin: auto;width:100%;text-align:center;height:100%;background-color:#eee; }
+	  .loader { position: absolute;margin: auto;top: 0;right: 0;bottom: 0;left: 0; border: 16px solid #f3f3f3; border-top: 16px solid #7b7bb9; border-radius: 50%; width: 120px; height: 120px; animation: spin 2s linear infinite; }
+	  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-</head>
-
-<body>
-
-  <div class="mdl-layout mdl-js-layout">
-
-    <main class="mdl-layout__content">
-      <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--12-col mdl-typography--text-center">
-              <img src="images/spacehead.png"></img>
-          </div>
-      </div>
-
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--12-col mdl-typography--text-center">
-            <p>
-              Welcome to Spacehead, a full-stack development firm specializing in cutting-edge web solutions that bring your digital vision to life. We excel in building robust and dynamic web applications using the latest JavaScript technologies. Our frontend expertise spans across Vue.js, Angular, AngularJS, React, and native JavaScript, enabling us to deliver visually stunning, highly interactive, and versatile user experiences tailored to your specific needs.
-            </p>
-        </div>
-      </div>
-
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--12-col mdl-typography--text-center">
-          <form id="email-form" onsubmit="return handleSubmit(event);">
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="email" id="to" name="to">
-              <label class="mdl-textfield__label" for="to">Your Email</label>
-            </div>
-            <br />
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="text" id="subject" name="subject">
-              <label class="mdl-textfield__label" for="subject">Subject</label>
-            </div>
-            <br />
-            <div class="mdl-textfield mdl-js-textfield">
-              <textarea class="mdl-textfield__input" type="text" rows= "3" id="message" name="message"></textarea>
-              <label class="mdl-textfield__label" for="message">Message</label>
-            </div>
-            <br />
-            <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--12-col center-recaptcha">
-                <div class="g-recaptcha" data-sitekey="6LebLHUqAAAAACTSumw5l9gNHD0a20eesr-ef183">
-                </div>
-              </div>
-            </div>
-            <br/>
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">Send Email</button>
-          </form>
-        </div>
-      </div>
-
-  </main>
-
-  <footer class="mdl-layout__footer">
-      <div class="mdl-layout__footer-row">
-          <span class="mdl-layout__footer-text">(c)2024 Spacehead, Stockholm - Sweden.</span>
-      </div>
-  </footer>
-</div>
-
-
-
-
-        <script>
-          async function handleSubmit(event) {
-            event.preventDefault();
-
-            // Get the reCAPTCHA token
-            const recaptchaToken = grecaptcha.getResponse();
-
-            // Check if reCAPTCHA is completed
-            if (!recaptchaToken) {
-                alert("Please complete the reCAPTCHA challenge.");
-                return;
-            }
-
-              const form = document.getElementById("email-form");
-              const formData = new FormData(form);
-  
-              const data = {
-                  to: formData.get("to"),
-                  subject: formData.get("subject"),
-                  message: formData.get("message"),
-                  recaptchaToken: recaptchaToken
-              };
-  
-              const response = await fetch("https://www.spacehead.com/send-email", {
-                  method: "POST",
-                  headers: {
-                      "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify(data)
-              });
-  
-              const result = await response.text();
-              alert(result);
-          }
-      </script>
-
-</body>
+<link href="build/app.60e90600d581e6092a09.css" rel="stylesheet"></head>
+<body id="mainController" ng-controller="mainController as main" ng-include="'/templates/index.tmpl.html'">
+<div class="loader-wrapper"><div class="loader"></div></div>
+<script type="text/javascript" src="build/manifest.394ea2070ab1d863e1df.js"></script><script type="text/javascript" src="build/vendor.e71c7a7075308e5bd4b5.js"></script><script type="text/javascript" src="build/app.60e90600d581e6092a09.js"></script></body>
 </html>
